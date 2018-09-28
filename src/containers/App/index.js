@@ -29,6 +29,7 @@ const StepBlockGray = styled.div`
   padding: 14px 0;
   position: relative;
   font-size: 0.6em;
+  font-weight: bold;
 
   &.light {
     background-color: #ededed;
@@ -84,6 +85,9 @@ function renderArrow(bgCollor) {
 function renderHeader(content) {
   const title = _.get(content, "title", "");
   const topNavItems = _.get(content, "topNavItems", []);
+  const cogActive = _.get(content, "cogActive", false);
+  const subTitle = _.get(content, "subTitle", "");
+  const topSubNavItems = _.get(content, "topSubNavItems", []);
 
   return (
     <div id="header">
@@ -114,43 +118,36 @@ function renderHeader(content) {
         <div className="col col-md-4">
           <div className="row float-right text-right text-dark">
             <span className="pr-4 h3 d-inline-block border-right">
-              <i className="far fa-calendar-alt" />
+              <a href="/?page=ats" className="text-dark">
+                <i className="far fa-calendar-alt" />
+              </a>
             </span>
             <span className="pl-4 h3 d-inline-block">
-              <i className="fas fa-cog" />
+              <a
+                className={classnames({
+                  "text-dark": !cogActive,
+                  "text-orange": cogActive
+                })}
+                href="/?page=settings"
+              >
+                <i className="fas fa-cog" />
+              </a>
             </span>
           </div>
         </div>
       </div>
       <div className="row mt-5 pt-3">
         <div className="col col-md-12">
-          <HeaderBar>Pipeline</HeaderBar>
+          <HeaderBar>{subTitle}</HeaderBar>
         </div>
       </div>
       <div className="row mx-0" style={{ position: "relative" }}>
-        <StepBlockGray className="col border-right">
-          <span>Review</span>
-          {renderArrow("#b2b2b2")}
-        </StepBlockGray>
-        <StepBlockGray className="col border-right">
-          <span>Screen</span>
-          {renderArrow("#b2b2b2")}
-        </StepBlockGray>
-        <StepBlockGray className="col border-right">
-          <span>Interview</span>
-          {renderArrow("#b2b2b2")}
-        </StepBlockGray>
-        <StepBlockGray className="col border-right">
-          <span>Offer</span>
-          {renderArrow("#b2b2b2")}
-        </StepBlockGray>
-        <StepBlockGray className="light col border-right">
-          <span className="text-orange">Check</span>
-          {renderArrow("#ededed")}
-        </StepBlockGray>
-        <StepBlockGray className="light col">
-          <span>Acceptance</span>
-        </StepBlockGray>
+        {_.map(topSubNavItems, (o, i) => (
+          <StepBlockGray key={`topsubnav_${i}`} className={o.classNames}>
+            <span>{o.title}</span>
+            {o.showArrow && renderArrow(o.backgroundColor)}
+          </StepBlockGray>
+        ))}
       </div>
     </div>
   );
@@ -183,9 +180,11 @@ function renderLeft(content) {
 }
 
 function renderRight(content) {
+  const mainTitle = _.get(content, "mainTitle", "");
+
   return (
-    <div className="ml-2">
-      <HeaderBar>Background Screening</HeaderBar>
+    <div>
+      <HeaderBar>{mainTitle}</HeaderBar>
       <div style={{ height: "700px" }} className="bg-wgray" />
     </div>
   );
@@ -194,16 +193,88 @@ function renderRight(content) {
 const pageContent = {
   ats: {
     title: "Applicant Tracking System",
-    topNavItems: ["Jobs", "Candidates", "Reports"]
+    topNavItems: ["Jobs", "Candidates", "Reports"],
+    subTitle: "Pipeline",
+    mainTitle: "Background screening",
+    topSubNavItems: [
+      {
+        title: "Review",
+        classNames: "col border-right",
+        backgroundColor: "#b2b2b2",
+        showArrow: true
+      },
+      {
+        title: "Screen",
+        classNames: "col border-right",
+        backgroundColor: "#b2b2b2",
+        showArrow: true
+      },
+      {
+        title: "Interview",
+        classNames: "col border-right",
+        backgroundColor: "#b2b2b2",
+        showArrow: true
+      },
+      {
+        title: "Offer",
+        classNames: "col border-right",
+        backgroundColor: "#b2b2b2",
+        showArrow: true
+      },
+      {
+        title: "Check",
+        classNames: "light col border-right text-orange",
+        backgroundColor: "#ededed",
+        showArrow: true
+      },
+      {
+        title: "Acceptance",
+        classNames: "light col"
+      }
+    ]
+  },
+  settings: {
+    title: "Applicant Tracking Systems",
+    topNavItems: ["Jobs", "Candidates", "Reports"],
+    cogActive: true,
+    subTitle: "Settings",
+    mainTitle: "Sterling account creation",
+    hideLeft: true,
+    topSubNavItems: [
+      {
+        title: "Account",
+        classNames: "col border-right"
+      },
+      {
+        title: "Users",
+        classNames: "col border-right"
+      },
+      {
+        title: "Groups",
+        classNames: "col border-right"
+      },
+      {
+        title: "Background check",
+        classNames: "col light border-right text-orange"
+      },
+      {
+        title: "Candidates",
+        classNames: "col"
+      }
+    ]
   },
   demo: {
     title: "Some Other System",
-    topNavItems: ["Tab1", "Tab2", "Tab3"]
+    topNavItems: ["Tab1", "Tab2", "Tab3"],
+    subTitle: "Pipeline",
+    mainTitle: "Background screening"
   }
 };
 
 export default function App({ pageName }) {
   const content = _.get(pageContent, pageName, pageContent.ats);
+  const hideLeft = _.get(content, "hideLeft", false);
+
   return (
     <div className="sterling">
       <div className="container">
@@ -211,8 +282,19 @@ export default function App({ pageName }) {
           <div className="col col-md-12">{renderHeader(content)}</div>
         </div>
         <div className="row my-5">
-          <div className="col col-md-3 col-xs-12">{renderLeft(content)}</div>
-          <div className="col col-md-9 col-xs-12">{renderRight(content)}</div>
+          {!hideLeft && (
+            <div className="col col-md-3 col-xs-12">
+              <div className="ml-2">{renderLeft(content)}</div>
+            </div>
+          )}
+          <div
+            className={classnames("col col-xs-12", {
+              "col-md-9": !hideLeft,
+              "col-md-12": !!hideLeft
+            })}
+          >
+            {renderRight(content)}
+          </div>
         </div>
       </div>
     </div>
