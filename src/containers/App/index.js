@@ -46,6 +46,41 @@ const SectionLable = styled.div`
   }
 `;
 
+function renderArrow(bgCollor) {
+  return (
+    <div
+      style={{ position: "absolute", top: "13px", right: "9px", zIndex: 999 }}
+    >
+      <div style={{ position: "relative" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "2px",
+            color: "white",
+            height: "18px",
+            width: "18px",
+            backgroundColor: "white",
+            transform: "rotate(45deg)"
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "1px",
+            left: "0",
+            color: "white",
+            height: "16px",
+            width: "16px",
+            backgroundColor: `${bgCollor}`,
+            transform: "rotate(45deg)"
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function renderHeader(content) {
   const title = _.get(content, "title", "");
   const topNavItems = _.get(content, "topNavItems", []);
@@ -92,13 +127,30 @@ function renderHeader(content) {
           <HeaderBar>Pipeline</HeaderBar>
         </div>
       </div>
-      <div className="row mx-0">
-        <StepBlockGray className="col border-right">Review</StepBlockGray>
-        <StepBlockGray className="col border-right">Screen</StepBlockGray>
-        <StepBlockGray className="col border-right">Interview</StepBlockGray>
-        <StepBlockGray className="col border-right">Offer</StepBlockGray>
-        <StepBlockGray className="light col border-right">Check</StepBlockGray>
-        <StepBlockGray className="light col">Acceptance</StepBlockGray>
+      <div className="row mx-0" style={{ position: "relative" }}>
+        <StepBlockGray className="col border-right">
+          <span>Review</span>
+          {renderArrow("#b2b2b2")}
+        </StepBlockGray>
+        <StepBlockGray className="col border-right">
+          <span>Screen</span>
+          {renderArrow("#b2b2b2")}
+        </StepBlockGray>
+        <StepBlockGray className="col border-right">
+          <span>Interview</span>
+          {renderArrow("#b2b2b2")}
+        </StepBlockGray>
+        <StepBlockGray className="col border-right">
+          <span>Offer</span>
+          {renderArrow("#b2b2b2")}
+        </StepBlockGray>
+        <StepBlockGray className="light col border-right">
+          <span className="text-orange">Check</span>
+          {renderArrow("#ededed")}
+        </StepBlockGray>
+        <StepBlockGray className="light col">
+          <span>Acceptance</span>
+        </StepBlockGray>
       </div>
     </div>
   );
