@@ -1,4 +1,23 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+#root .sterling .text-orange {
+  color: #ff4b2f;
+}
+
+#root .sterling .text-lgray {
+  color: #b8b8b8;
+}
+
+#root .sterling .bg-orange {
+  background-color: #ff4b2f;
+}
+
+#root .sterling .bg-lgray {
+  background-color: #b2b2b2;
+}
+
+#root .sterling .bg-wgray {
+  background-color: #f5f5f5;
+}
+
+#root .sterling .fw-normal {
+  font-weight: normal;
 }
