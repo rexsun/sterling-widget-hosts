@@ -105,8 +105,8 @@ function renderHeader(content) {
                 className={classnames({
                   "pl-5": !!i,
                   "pr-5": i < _.size(topNavItems) - 1,
-                  "text-lgray": i !== 1,
-                  "text-orange": i === 1,
+                  "text-lgray": i !== 3,
+                  "text-orange": i === 3,
                   "border-left": !!i
                 })}
               >
@@ -136,6 +136,7 @@ function renderHeader(content) {
           </div>
         </div>
       </div>
+      {/*
       <div className="row mt-5 pt-3">
         <div className="col col-md-12">
           <HeaderBar>{subTitle}</HeaderBar>
@@ -149,13 +150,17 @@ function renderHeader(content) {
           </StepBlockGray>
         ))}
       </div>
+      */}
     </div>
   );
 }
 
 function renderLeft(content) {
+  const leftNavItems = _.get(content, "leftNavItems", []);
+
   return (
     <div id="left-sider">
+      {/*
       <div className="">
         <HeaderBar className="orange">Candidate</HeaderBar>
       </div>
@@ -175,17 +180,95 @@ function renderLeft(content) {
           Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem
         </SectionLable>
       </div>
+      */}
+      {_.map(leftNavItems, (o, i) => (
+        <StepBlockGray key={`leftnav_${i}`} className={o.classNames}>
+          <span>{o.title}</span>
+          {o.showArrow && renderArrow(o.backgroundColor)}
+        </StepBlockGray>
+      ))}
     </div>
   );
 }
 
 function renderRight(content) {
   const mainTitle = _.get(content, "mainTitle", "");
+  const sectionRight = _.get(content, "sectionRight", "");
+
+  let rightContent = (function renderRightContent(name) {
+    switch (name) {
+      case "ats":
+        return (
+          <div className="row py-3">
+            <div className="col-md-4 col-xs-12">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Company A</h5>
+                  <p className="card-text">
+                    To set up account: <br />
+                    1. Call sales <br />
+                    ...
+                  </p>
+                  <p className="card-text text-right">1 of 9</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 col-xs-12">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Company B</h5>
+                  <p className="card-text">
+                    To set up account: <br />
+                    1. Call sales <br />
+                    ...
+                  </p>
+                  <p className="card-text text-right">1 of 8</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 col-xs-12">
+              <div className="card">
+                <div className="card-body text-dark">
+                  <h5 className="card-title">SterlingNOW</h5>
+                  <p className="card-text">
+                    <br />
+                    <a href="/?page=settings">Instant Account Setup</a>
+                    <br />
+                    <br />
+                  </p>
+                  <p className="card-text text-right">
+                    <br />
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case "settings":
+        return (
+          <div>
+            <div className="text-center pt-3">
+              <img
+                src="https://go.sterlingnow.io/img/sterlingnow.svg"
+                style={{ width: "300px" }}
+                alt="SterlingNOW"
+              />
+              <div id="sterlingnow-widget" />
+              {/* Account setup widget */}
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  })(sectionRight);
 
   return (
     <div>
       <HeaderBar>{mainTitle}</HeaderBar>
-      <div style={{ height: "700px" }} className="bg-wgray" />
+      <div style={{ height: "700px" }} className="bg-wgray">
+        {rightContent}
+      </div>
     </div>
   );
 }
@@ -193,9 +276,10 @@ function renderRight(content) {
 const pageContent = {
   ats: {
     title: "Applicant Tracking System",
-    topNavItems: ["Jobs", "Candidates", "Reports"],
+    topNavItems: ["Accounts", "Billing", "Roles", "Integrations"],
     subTitle: "Pipeline",
-    mainTitle: "Background screening",
+    mainTitle: "Screening Partners",
+    sectionRight: "ats",
     topSubNavItems: [
       {
         title: "Review",
@@ -231,15 +315,38 @@ const pageContent = {
         title: "Acceptance",
         classNames: "light col"
       }
+    ],
+    leftNavItems: [
+      {
+        title: "Job Boards",
+        classNames: "text-dark"
+      },
+      {
+        title: "Background Checks",
+        classNames: "light text-orange"
+      },
+      {
+        title: "Assessments",
+        classNames: "text-dark"
+      },
+      {
+        title: "Access & Communication",
+        classNames: "text-dark"
+      },
+      {
+        title: "Reporting",
+        classNames: "text-dark"
+      }
     ]
   },
   settings: {
-    title: "Applicant Tracking Systems",
-    topNavItems: ["Jobs", "Candidates", "Reports"],
+    title: "Applicant Tracking System",
+    topNavItems: ["Accounts", "Billing", "Roles", "Integrations"],
     cogActive: true,
     subTitle: "Settings",
     mainTitle: "Sterling account creation",
-    hideLeft: true,
+    hideLeft: false,
+    sectionRight: "settings",
     topSubNavItems: [
       {
         title: "Account",
@@ -261,19 +368,37 @@ const pageContent = {
         title: "Candidates",
         classNames: "col"
       }
+    ],
+    leftNavItems: [
+      {
+        title: "Job Boards",
+        classNames: "text-dark"
+      },
+      {
+        title: "Background Checks",
+        classNames: "light text-orange"
+      },
+      {
+        title: "Assessments",
+        classNames: "text-dark"
+      },
+      {
+        title: "Access & Communication",
+        classNames: "text-dark"
+      },
+      {
+        title: "Reporting",
+        classNames: "text-dark"
+      }
     ]
-  },
-  demo: {
-    title: "Some Other System",
-    topNavItems: ["Tab1", "Tab2", "Tab3"],
-    subTitle: "Pipeline",
-    mainTitle: "Background screening"
   }
 };
 
 export default function App({ pageName }) {
   const content = _.get(pageContent, pageName, pageContent.ats);
   const hideLeft = _.get(content, "hideLeft", false);
+
+  setTimeout(renderWidget, 300);
 
   return (
     <div className="sterling">
@@ -299,4 +424,10 @@ export default function App({ pageName }) {
       </div>
     </div>
   );
+}
+
+function renderWidget() {
+  jQuery("#sterlingnow-widget").html(`
+    ---- SterlingNOW widget ----
+  `);
 }

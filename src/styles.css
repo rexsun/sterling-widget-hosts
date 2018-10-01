@@ -6,6 +6,10 @@
   color: #b8b8b8;
 }
 
+#root .sterling .border-orange {
+  border-color: #ff4b2f !important;
+}
+
 #root .sterling .bg-orange {
   background-color: #ff4b2f;
 }
