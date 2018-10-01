@@ -232,7 +232,9 @@ function renderRight(content) {
                   <h5 className="card-title">SterlingNOW</h5>
                   <p className="card-text">
                     <br />
-                    <a href="/?page=settings">Instant Account Setup</a>
+                    <a href="/?page=settings" className="btn btn-primary">
+                      Instant Account Setup
+                    </a>
                     <br />
                     <br />
                   </p>
