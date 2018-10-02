@@ -153,7 +153,7 @@ function renderHeader(content) {
                   "text-dark": !cogActive,
                   "text-orange": cogActive
                 })}
-                href="/?page=settings"
+                href="/?page=packages"
               >
                 <i className="fas fa-cog" />
               </a>
@@ -257,7 +257,7 @@ function renderRight(content) {
                   <h5 className="card-title">SterlingNOW</h5>
                   <p className="card-text">
                     <br />
-                    <a href="/?page=settings" className="btn btn-primary">
+                    <a href="/?page=packages" className="btn btn-primary">
                       Instant Account Setup
                     </a>
                     <br />

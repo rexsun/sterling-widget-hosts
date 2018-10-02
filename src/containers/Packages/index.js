@@ -170,6 +170,9 @@ export class container extends React.PureComponent {
           <hr />
         </div>
         <div className="col-md-12">{self.renderPackages(self)}</div>
+        <div className="col-md-12 text-right">
+        <a className="btn btn-orange" href="/?page=settings">Next</a>
+        </div>
       </div>
     );
   }
