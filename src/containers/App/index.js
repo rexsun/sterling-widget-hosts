@@ -438,6 +438,7 @@ export default function App({ pageName }) {
 }
 
 function renderWidget() {
+  const jQuery = window.jQuery;
   jQuery("#sterlingnow-widget").html(`
     ---- SterlingNOW widget ----
   `);
