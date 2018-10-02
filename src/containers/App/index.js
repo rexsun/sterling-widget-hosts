@@ -3,6 +3,8 @@ import React from "react";
 import classnames from "classnames";
 import styled from "styled-components";
 
+import Packages from "../Packages";
+
 const HeaderBar = styled.div`
   background-color: black;
   color: white;
@@ -299,6 +301,8 @@ function renderRight(content) {
             </div>
           </div>
         );
+      case "packages":
+        return (<div style={{padding: "15px"}}><Packages /></div>);
       default:
         return null;
     }
@@ -307,7 +311,7 @@ function renderRight(content) {
   return (
     <div>
       <HeaderBar>{mainTitle}</HeaderBar>
-      <div style={{ height: "700px" }} className="bg-wgray">
+      <div style={{ minHeight: "700px" }} className="bg-wgray">
         {rightContent}
       </div>
     </div>
@@ -436,6 +440,7 @@ const pageContent = {
 };
 
 _.set(pageContent, 'config', _.merge(_.cloneDeep(pageContent["settings"]), { sectionRight: 'config' }));
+_.set(pageContent, 'packages', _.merge(_.cloneDeep(pageContent["settings"]), { sectionRight: 'packages', mainTitle: "Sterling Packages" }));
 
 export default function App({ pageName }) {
   const content = _.get(pageContent, pageName, pageContent.ats);
