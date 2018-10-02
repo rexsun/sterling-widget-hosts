@@ -93,7 +93,11 @@ function renderHeader(content) {
     <div id="header">
       <div className="row">
         <div className="col col-md-12 mt-4">
-          <h1>{title}</h1>
+          <h1>
+            <a href="/?page=ats" className="text-dark">
+              {title}
+            </a>
+          </h1>
         </div>
       </div>
       <div className="row mt-3 pb-3 mx-0 border-bottom">
@@ -105,12 +109,19 @@ function renderHeader(content) {
                 className={classnames({
                   "pl-5": !!i,
                   "pr-5": i < _.size(topNavItems) - 1,
-                  "text-lgray": i !== 3,
-                  "text-orange": i === 3,
+                  "text-lgray": true,
                   "border-left": !!i
                 })}
               >
-                <h3 className="fw-normal">{o}</h3>
+                <h3 className="fw-normal">
+                  {i === 3 ? (
+                    <a className="text-orange" href="/?page=ats">
+                      {o}
+                    </a>
+                  ) : (
+                    o
+                  )}
+                </h3>
               </div>
             ))}
           </div>
@@ -118,9 +129,7 @@ function renderHeader(content) {
         <div className="col col-md-4">
           <div className="row float-right text-right text-dark">
             <span className="pr-4 h3 d-inline-block border-right">
-              <a href="/?page=ats" className="text-dark">
-                <i className="far fa-calendar-alt" />
-              </a>
+              <i className="far fa-calendar-alt text-dark" />
             </span>
             <span className="pl-4 h3 d-inline-block">
               <a
@@ -201,7 +210,7 @@ function renderRight(content) {
         return (
           <div className="row py-3">
             <div className="col-md-4 col-xs-12">
-              <div className="card">
+              <div className="card" style={{ height: "215px" }}>
                 <div className="card-body">
                   <h5 className="card-title">Company A</h5>
                   <p className="card-text">
@@ -214,7 +223,7 @@ function renderRight(content) {
               </div>
             </div>
             <div className="col-md-4 col-xs-12">
-              <div className="card">
+              <div className="card" style={{ height: "215px" }}>
                 <div className="card-body">
                   <h5 className="card-title">Company B</h5>
                   <p className="card-text">
@@ -227,7 +236,7 @@ function renderRight(content) {
               </div>
             </div>
             <div className="col-md-4 col-xs-12">
-              <div className="card">
+              <div className="card" style={{ height: "215px" }}>
                 <div className="card-body text-dark">
                   <h5 className="card-title">SterlingNOW</h5>
                   <p className="card-text">
@@ -411,7 +420,7 @@ export default function App({ pageName }) {
         <div className="row my-5">
           {!hideLeft && (
             <div className="col col-md-3 col-xs-12">
-              <div className="ml-2">{renderLeft(content)}</div>
+              <div>{renderLeft(content)}</div>
             </div>
           )}
           <div
