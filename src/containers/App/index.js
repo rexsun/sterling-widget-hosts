@@ -302,7 +302,7 @@ function renderRight(content) {
           </div>
         );
       case "packages":
-        return (<div style={{padding: "15px"}}><Packages /></div>);
+        return (<div style={{ padding: "15px" }}><Packages /></div>);
       default:
         return null;
     }
@@ -483,6 +483,7 @@ function renderWidget(pageName) {
       $("#sterlingnow-widget").html(`
     <div id="sterlingWidget">---- SterlingNOW widget ----</div>
     <script>
+    var accessToken = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5rZW5uZWN0LmNvbS8iLCJzdWIiOiJvbmRlbWFuZHxteUNvbXBhbnlVc2VySWR8MjAwMTA0NDgiLCJyb2xlcyI6WyIvaW50L0dFVC9qcy9wYWNrYWdlcy9udWxsL3ByaWNlIiwiL2ludC9QT1NUL2pzL3NjcmVlbmluZ3MiLCIvaW50L1BPU1QvanMvY2hhcmdlcyIsIi9pbnQvR0VUL2pzL3BhY2thZ2VzIiwiL2ludC9QT1NUL2pzL2NhbmRpZGF0ZXMiLCIvaW50L1BPU1QvanMvYWNjb3VudHMiXSwiZGF0YSI6eyJiYXNlVXJsIjoiaHR0cDovL29uZGVtYW5kLnN0ZXJsaW5nLmlvOjgwODAvdjEvIiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdDozMDExIiwic2NzIjp7InRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSjkuZXlKcGMzTWlPaUpvZEhSd2N6b3ZMM05qY3k1emRHVnliR2x1Wnk1M2FHRjBaWFpsY2k4aUxDSnpkV0lpT2lKVGRHVnliR2x1WnlCUGJpMUVaVzFoYm1RZ1FWQkpJaXdpWkdGMFlTSTZleUp2Y21sbmFXNGlPaUpvZEhSd09pOHZiRzlqWVd4b2IzTjBPak13TVRFaUxDSnVZVzFsYzNCaFkyVWlPaUl5TURBeE1EUTBPSHh0ZVVOdmJYQmhibmxWYzJWeVNXUWlmU3dpYVdGMElqb3hOVE00TlRBMU56QXlMQ0psZUhBaU9qRTFNemcxTURrek1ESjkuVmRjbzRsYzhfTFpscEdvR3A3UGtfMTJnaEdGYTR4Wm00Q1ZNaUhFV1M3Z2FGRGdRVndic0VobUVjTjVobVZ4X2xQQXNtbnZXTzN0bGtLOU9RZWVNNE5EeFBRVjB3Y1lpeGJUY1ZJWEh5R0h2VlVoUnlvNjhxRnZybktPYzFPdkFSVG8zekFrZDZDU1NrM3JLYnY3a2l2ZGdkUXpIamZuSjh4cUFac29NcWNETGZPbENqUFVTelhqZWZyS3V6TkNmVU1GSFg2a3dCVXNxSkxXb01oOE5hbng3OXhzNkozZzlFbk4tZFpuQUEzd2hyRmFqa0MyaXVzaHE1YlROa0NBNHJsQlltSlJHRkMyN0xyVGJHb0RMc2tLQ1JuN25QYU5MWGE4R24zT2piS3VrYm5GWlh5UVVLTWQyZ3hLd2JJUUpyQWM4S3F4QTNyejAydmtFdnhxNnNRIn19LCJpYXQiOjE1Mzg1MDU3MDIsImV4cCI6MTUzODUwOTMwMn0.FBGqtJMLwlszLi7vv2pj0ff5r9YeCXy1ouZFtlEgw8w9kmH2WapBWV9hXu6uiuj7RT6emyhCNtdAzmQ-0Vo5rgrZqP6ejkDDRBG3UFWU6KXPm4Ljqnt2mQqb0uDgQK3e097Adgxys1u8lj3u8_QVcjiwU0axAP9SJciBHdVoZ5W_8n0z75xq0V_oZlgnt8rQ_YiQCMM6ogGm353xODo5aLcM9d7UNl3VYfwKA-jiygiZ3-i4YsOEriS4n0oZGTMm9iAb1u0OvLVlsNGw1RTCPsSt0p-yhepWbmt1iWY4Ndjomqvw1PchCMdrS7g0Odp1z6YjfI7AOCZBFR_9Uf_5Sw';
     var partnerName = 'Demo';
     function initWidget() {        
         var config = new sterlingts.Config(accessToken);
@@ -522,7 +523,10 @@ function renderWidget(pageName) {
     case 'config':
       // widget configuration script should be copied inside below html('')
       $("#sterlingnow-widget-config").html(`
-          
+      <script>
+      var accessToken = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5rZW5uZWN0LmNvbS8iLCJzdWIiOiJvbmRlbWFuZHxteUNvbXBhbnlVc2VySWR8MjAwMTA0NDgiLCJyb2xlcyI6WyIvaW50L0dFVC9qcy9wYWNrYWdlcy9udWxsL3ByaWNlIiwiL2ludC9QT1NUL2pzL3NjcmVlbmluZ3MiLCIvaW50L1BPU1QvanMvY2hhcmdlcyIsIi9pbnQvR0VUL2pzL3BhY2thZ2VzIiwiL2ludC9QT1NUL2pzL2NhbmRpZGF0ZXMiLCIvaW50L1BPU1QvanMvYWNjb3VudHMiXSwiZGF0YSI6eyJiYXNlVXJsIjoiaHR0cDovL29uZGVtYW5kLnN0ZXJsaW5nLmlvOjgwODAvdjEvIiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdDozMDExIiwic2NzIjp7InRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSjkuZXlKcGMzTWlPaUpvZEhSd2N6b3ZMM05qY3k1emRHVnliR2x1Wnk1M2FHRjBaWFpsY2k4aUxDSnpkV0lpT2lKVGRHVnliR2x1WnlCUGJpMUVaVzFoYm1RZ1FWQkpJaXdpWkdGMFlTSTZleUp2Y21sbmFXNGlPaUpvZEhSd09pOHZiRzlqWVd4b2IzTjBPak13TVRFaUxDSnVZVzFsYzNCaFkyVWlPaUl5TURBeE1EUTBPSHh0ZVVOdmJYQmhibmxWYzJWeVNXUWlmU3dpYVdGMElqb3hOVE00TlRBMU56QXlMQ0psZUhBaU9qRTFNemcxTURrek1ESjkuVmRjbzRsYzhfTFpscEdvR3A3UGtfMTJnaEdGYTR4Wm00Q1ZNaUhFV1M3Z2FGRGdRVndic0VobUVjTjVobVZ4X2xQQXNtbnZXTzN0bGtLOU9RZWVNNE5EeFBRVjB3Y1lpeGJUY1ZJWEh5R0h2VlVoUnlvNjhxRnZybktPYzFPdkFSVG8zekFrZDZDU1NrM3JLYnY3a2l2ZGdkUXpIamZuSjh4cUFac29NcWNETGZPbENqUFVTelhqZWZyS3V6TkNmVU1GSFg2a3dCVXNxSkxXb01oOE5hbng3OXhzNkozZzlFbk4tZFpuQUEzd2hyRmFqa0MyaXVzaHE1YlROa0NBNHJsQlltSlJHRkMyN0xyVGJHb0RMc2tLQ1JuN25QYU5MWGE4R24zT2piS3VrYm5GWlh5UVVLTWQyZ3hLd2JJUUpyQWM4S3F4QTNyejAydmtFdnhxNnNRIn19LCJpYXQiOjE1Mzg1MDU3MDIsImV4cCI6MTUzODUwOTMwMn0.FBGqtJMLwlszLi7vv2pj0ff5r9YeCXy1ouZFtlEgw8w9kmH2WapBWV9hXu6uiuj7RT6emyhCNtdAzmQ-0Vo5rgrZqP6ejkDDRBG3UFWU6KXPm4Ljqnt2mQqb0uDgQK3e097Adgxys1u8lj3u8_QVcjiwU0axAP9SJciBHdVoZ5W_8n0z75xq0V_oZlgnt8rQ_YiQCMM6ogGm353xODo5aLcM9d7UNl3VYfwKA-jiygiZ3-i4YsOEriS4n0oZGTMm9iAb1u0OvLVlsNGw1RTCPsSt0p-yhepWbmt1iWY4Ndjomqvw1PchCMdrS7g0Odp1z6YjfI7AOCZBFR_9Uf_5Sw';
+      </script>   
+     
     `);
       break;
   }
