@@ -274,30 +274,30 @@ function renderRight(content) {
       case "settings":
         return (
           <div>
-            <div className="text-center pt-3">
+            <div className="text-center py-3">
               <img
                 src="https://go.sterlingnow.io/img/sterlingnow.svg"
                 style={{ width: "300px" }}
                 alt="SterlingNOW"
               />
-              <div id="sterlingnow-widget">
-                {/* Account setup widget */}
-              </div>
+            </div>
+            <div id="sterlingnow-widget">
+              {/* Account setup widget */}
             </div>
           </div>
         );
       case "config":
         return (
           <div>
-            <div className="text-center pt-3">
+            <div className="text-center py-3">
               <img
                 src="https://go.sterlingnow.io/img/sterlingnow.svg"
                 style={{ width: "300px" }}
                 alt="SterlingNOW"
               />
-              <div id="sterlingnow-widget-config">
-                {/* Account setup widget */}
-              </div>
+            </div>
+            <div id="sterlingnow-widget-config">
+              {/* Account setup widget */}
             </div>
           </div>
         );
