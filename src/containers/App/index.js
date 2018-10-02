@@ -218,7 +218,7 @@ function renderRight(content) {
                     1. Call sales <br />
                     ...
                   </p>
-                  <p className="card-text text-right">1 of 9</p>
+                  <p className="card-text text-right">Step 1 of 9</p>
                 </div>
               </div>
             </div>
@@ -231,7 +231,7 @@ function renderRight(content) {
                     1. Call sales <br />
                     ...
                   </p>
-                  <p className="card-text text-right">1 of 8</p>
+                  <p className="card-text text-right">Step 1 of 8</p>
                 </div>
               </div>
             </div>
