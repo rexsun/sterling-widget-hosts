@@ -47,6 +47,20 @@ const SectionLable = styled.div`
   }
 `;
 
+function now_loadScript (url, cb) {
+  const $ = window.jQuery;
+  if (!_.isFunction(cb)) {
+      cb = function () {
+      };
+  }
+  $.ajax({
+      url: url,
+      dataType: 'script',
+      success: cb,
+      async: true
+  });
+}
+
 function renderArrow(bgCollor) {
   return (
     <div
@@ -264,8 +278,9 @@ function renderRight(content) {
                 style={{ width: "300px" }}
                 alt="SterlingNOW"
               />
-              <div id="sterlingnow-widget" />
+              <div id="sterlingnow-widget">
               {/* Account setup widget */}
+              </div>
             </div>
           </div>
         );
@@ -438,8 +453,43 @@ export default function App({ pageName }) {
 }
 
 function renderWidget() {
-  const jQuery = window.jQuery;
-  jQuery("#sterlingnow-widget").html(`
-    ---- SterlingNOW widget ----
+  const $ = window.jQuery;
+  window.now_loadScript = now_loadScript;
+  $("#sterlingnow-widget").html(`
+    <div id="sterlingWidget">---- SterlingNOW widget ----</div>
+    <script>
+    var partnerName = 'Demo';
+    function initWidget() {        
+        var config = new sterlingts.Config(accessToken);
+        var workflowType = sterlingts.workflow.WorkflowType;
+        var workflowOptions = {
+                element: document.getElementById('sterlingWidget')
+            };
+    
+        var workflow = new sterlingts.workflow.GetWorkflow(
+                workflowType.CREATE_ACCOUNT,
+                workflowOptions
+        );
+    
+        config.set('partnerName', partnerName);
+    
+        workflow.on('complete', function(input) {
+            console.log(input);
+        })
+        .on('ready', function(data) {
+            console.log('Workflow Ready');
+        })
+        .on('close', function() {
+            alert('User says they are done. This could be a point where you take over the UI again');
+        })
+        .on("error", function(error) {
+            console.log("Error in workflow");
+            console.log(error);
+        });
+    
+        workflow.initialize();
+    }
+    now_loadScript("http://dev.app.sterling.io/js/sterling.js?callback=initWidget");
+    </script>
   `);
 }
