@@ -387,7 +387,7 @@ const pageContent = {
   settings: {
     title: "Applicant Tracking System",
     topNavItems: ["Accounts", "Billing", "Roles", "Integrations"],
-    cogActive: true,
+    cogActive: false,
     subTitle: "Settings",
     mainTitle: "Sterling account creation",
     hideLeft: false,
