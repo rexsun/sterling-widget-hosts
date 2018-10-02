@@ -47,17 +47,17 @@ const SectionLable = styled.div`
   }
 `;
 
-function now_loadScript (url, cb) {
+function now_loadScript(url, cb) {
   const $ = window.jQuery;
   if (!_.isFunction(cb)) {
-      cb = function () {
-      };
+    cb = function () {
+    };
   }
   $.ajax({
-      url: url,
-      dataType: 'script',
-      success: cb,
-      async: true
+    url: url,
+    dataType: 'script',
+    success: cb,
+    async: true
   });
 }
 
@@ -133,8 +133,8 @@ function renderHeader(content) {
                       {o}
                     </a>
                   ) : (
-                    o
-                  )}
+                      o
+                    )}
                 </h3>
               </div>
             ))}
@@ -279,7 +279,22 @@ function renderRight(content) {
                 alt="SterlingNOW"
               />
               <div id="sterlingnow-widget">
-              {/* Account setup widget */}
+                {/* Account setup widget */}
+              </div>
+            </div>
+          </div>
+        );
+      case "config":
+        return (
+          <div>
+            <div className="text-center pt-3">
+              <img
+                src="https://go.sterlingnow.io/img/sterlingnow.svg"
+                style={{ width: "300px" }}
+                alt="SterlingNOW"
+              />
+              <div id="sterlingnow-widget-config">
+                {/* Account setup widget */}
               </div>
             </div>
           </div>
@@ -420,11 +435,13 @@ const pageContent = {
   }
 };
 
+_.set(pageContent, 'config', _.merge(_.cloneDeep(pageContent["settings"]), { sectionRight: 'config' }));
+
 export default function App({ pageName }) {
   const content = _.get(pageContent, pageName, pageContent.ats);
   const hideLeft = _.get(content, "hideLeft", false);
 
-  setTimeout(renderWidget, 300);
+  setTimeout(_.partial(renderWidget, pageName), 300);
 
   return (
     <div className="sterling">
@@ -452,10 +469,13 @@ export default function App({ pageName }) {
   );
 }
 
-function renderWidget() {
+function renderWidget(pageName) {
   const $ = window.jQuery;
   window.now_loadScript = now_loadScript;
-  $("#sterlingnow-widget").html(`
+
+  switch (pageName) {
+    case 'settings':
+      $("#sterlingnow-widget").html(`
     <div id="sterlingWidget">---- SterlingNOW widget ----</div>
     <script>
     var partnerName = 'Demo';
@@ -492,4 +512,13 @@ function renderWidget() {
     now_loadScript("http://dev.app.sterling.io/js/sterling.js?callback=initWidget");
     </script>
   `);
+      break;
+
+    case 'config':
+      // widget configuration script should be copied inside below html('')
+      $("#sterlingnow-widget-config").html(`
+          
+    `);
+      break;
+  }
 }
